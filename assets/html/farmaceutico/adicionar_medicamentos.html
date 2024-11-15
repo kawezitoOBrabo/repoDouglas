@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Medicamentos</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background-color: #f3f4f6;
+        --primary-color: #10b981;
+        --secondary-color: #1f2937;
+        --text-color: #1a1a1a;
+        --hover-background: #374151;
+        --card-background: #ffffff;
+        --card-text-color: #4b5563;
+        --footer-background: #374151;
+        --footer-text-color: #9ca3af;
+        --border-color: #e5e7eb;
+      }
+
+      .dark-theme {
+        --background-color: #1f2937;
+        --primary-color: #10b981;
+        --secondary-color: #374151;
+        --text-color: #e5e7eb;
+        --hover-background: #4b5563;
+        --card-background: #374151;
+        --card-text-color: #d1d5db;
+        --footer-background: #4b5563;
+        --footer-text-color: #e5e7eb;
+        --border-color: #6b7280;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        background-color: var(--background-color);
+        font-family: Arial, sans-serif;
+        color: var(--text-color);
+        overflow: hidden;
+      }
+
+      main {
+        display: flex;
+        height: 100%;
+      }
+
+      .main-left-content {
+        width: 25%;
+        background-color: var(--secondary-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2% 0;
+        color: var(--text-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .main-left-content-header {
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .main-left-content-header img {
+        width: 120px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .main-left-content-main ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .main-left-content-main ul li {
+        margin: 10px 0;
+      }
+
+      .main-left-content-main ul li a {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        font-size: 1.1em;
+        text-decoration: none;
+        color: var(--footer-text-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .main-left-content-main ul li a:hover {
+        background-color: var(--hover-background);
+        color: var(--text-color);
+      }
+
+      .main-left-content-main ul li a i {
+        margin-right: 12px;
+        font-size: 1.3em;
+      }
+
+      .main-left-content-footer {
+        text-align: center;
+        padding: 15px 0;
+        background-color: var(--footer-background);
+        border-radius: 0 0 8px 8px;
+        color: var(--footer-text-color);
+      }
+
+      .main-right-content {
+        width: 75%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .main-right-content-header h1 {
+        font-size: 1.8em;
+        color: var(--primary-color);
+        font-weight: bold;
+        border-bottom: 4px solid var(--border-color);
+        padding-bottom: 10px;
+      }
+
+      .main-right-content-main {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .card {
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h2 {
+        text-align: center;
+        color: #10b981;
+        margin-bottom: 20px;
+      }
+
+      .form-two-columns {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .form-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .form-column label {
+        font-weight: bold;
+        color: #374151;
+      }
+
+      .form-column input,
+      select {
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 1em;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #10b981;
+        color: #ffffff;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #059669;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="main-left-content">
+        <button id="buttonId" onclick="toggleDarkMode()">
+          <i id="theme-icon" class="fa fa-sun"></i>
+          Alternar Modo Escuro
+        </button>
+        <div class="main-left-content-header">
+          <img src="../../img/avatar-design.png" alt="Icone de Administrador" />
+          <h1>Farmacêutico</h1>
+        </div>
+        <div class="main-left-content-main">
+          <ul>
+            <li>
+              <a href="./painel_principal.html" target="_parent"
+                ><i class="fa-solid fa-chart-line"></i>Painel Principal</a
+              >
+            </li>
+            <li>
+              <a href="./adicionar_medicamentos.html" target="_parent"
+                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./listar_medicamentos.html" target="_parent"
+                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./alterar_medicamentos.html" target="_parent"
+                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./verificar_validades.html" target="_parent"
+                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
+              >
+            </li>
+            <li>
+              <a href="./vender_medicamentos.html" target="_parent"
+                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./login_page.html" onclick="redirectLoginPage()"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="main-left-content-footer">
+          <h1>Farmacêutico</h1>
+        </div>
+      </section>
+      <section class="main-right-content">
+        <div class="main-right-content-header">
+          <h1>Adicionar Medicamentos</h1>
+        </div>
+        <div class="main-right-content-main">
+          <div class="card">
+            <h2>Formulário de Adição de os Medicamentos</h2>
+            <form class="form-two-columns" onsubmit="registerUser(event)">
+              <div class="form-column">
+                <label for="id">Id do Medicamento</label>
+                <input type="number" name="id" id="id" required />
+
+                <label for="name">Nome Completo</label>
+                <input type="text" name="name" id="name" required />
+
+                <label for="number">Nº do Medicamento</label>
+                <input type="number" name="number" id="number" required />
+
+                <label for="dateFabr">Data de Fabricação</label>
+                <input type="date" name="dateFabr" id="dateFabr" required />
+              </div>
+              <div class="form-column">
+                <label for="dateExp">Data de Expiração</label>
+                <input type="date" name="dateExp" id="dateExp" required />
+
+                <label for="quantidade">Quantidade</label>
+                <input
+                  type="number"
+                  name="quantidade"
+                  id="quantidade"
+                  required
+                />
+
+                <label for="preco">Preço por Unidade</label>
+                <input type="text" name="preco" id="preco" required />
+                <button type="submit" onclick="alert('Medicamento Adicionado')">
+                  Adicionar
+                  <i class="fa-solid fa-add"></i>
+                </button>
+                <button type="reset">
+                  Limpar
+                  <i class="fa-solid fa-arrows-rotate"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark-theme");
+        const button = document.getElementById("buttonId");
+        if (document.documentElement.classList.contains("dark-theme")) {
+          button.innerHTML =
+            '<i id="theme-icon" class="fa fa-moon"></i> Alternar Modo Claro';
+        } else {
+          button.innerHTML =
+            '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
+        }
+      }
+      function redirectLoginPage() {
+        window.open("../../../login_page.html", "_blank");
+        window.close();
+      }
+      function registerUser(event) {
+        event.preventDefault(); // Evita o envio padrão do formulário
+
+        const user = document.getElementById("user").value;
+        const password = document.getElementById("password").value;
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        users.push({ user, password });
+
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Usuário registrado com sucesso!");
+      }
+    </script>
+  </body>
+</html>

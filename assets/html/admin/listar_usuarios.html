@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listar Usuários</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background-color: #f3f4f6;
+        --primary-color: #10b981;
+        --secondary-color: #1f2937;
+        --text-color: #1a1a1a;
+        --hover-background: #374151;
+        --card-background: #ffffff;
+        --card-text-color: #4b5563;
+        --footer-background: #374151;
+        --footer-text-color: #9ca3af;
+        --border-color: #e5e7eb;
+        --table-bg-even: #f9fafb;
+        --table-bg-odd: #ffffff;
+        --table-header-bg: #10b981;
+      }
+
+      .dark-theme {
+        --background-color: #1f2937;
+        --primary-color: #10b981;
+        --secondary-color: #374151;
+        --text-color: #e5e7eb;
+        --hover-background: #4b5563;
+        --card-background: #374151;
+        --card-text-color: #d1d5db;
+        --footer-background: #4b5563;
+        --footer-text-color: #e5e7eb;
+        --border-color: #6b7280;
+        --table-bg-even: #2d3748;
+        --table-bg-odd: #374151;
+        --table-header-bg: #4b5563;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        background-color: var(--background-color);
+        font-family: Arial, sans-serif;
+        color: var(--text-color);
+        overflow: hidden;
+      }
+
+      main {
+        display: flex;
+        height: 100%;
+      }
+
+      .main-left-content {
+        width: 25%;
+        background-color: var(--secondary-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2% 0;
+        color: var(--text-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .main-left-content-header {
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .main-left-content-header img {
+        width: 120px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .main-left-content-main ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .main-left-content-main ul li {
+        margin: 10px 0;
+      }
+
+      .main-left-content-main ul li a {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        font-size: 1.1em;
+        text-decoration: none;
+        color: var(--footer-text-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .main-left-content-main ul li a:hover {
+        background-color: var(--hover-background);
+        color: var(--text-color);
+      }
+
+      .main-left-content-main ul li a i {
+        margin-right: 12px;
+        font-size: 1.3em;
+      }
+
+      .main-left-content-footer {
+        text-align: center;
+        padding: 15px 0;
+        background-color: var(--footer-background);
+        border-radius: 0 0 8px 8px;
+        color: var(--footer-text-color);
+      }
+
+      .main-right-content {
+        width: 75%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .main-right-content-header h1 {
+        font-size: 1.8em;
+        color: var(--primary-color);
+        font-weight: bold;
+        border-bottom: 4px solid var(--border-color);
+        padding-bottom: 10px;
+      }
+
+      .main-right-content-main {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .card {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h2 {
+        text-align: center;
+        color: #10b981;
+        margin-bottom: 20px;
+      }
+
+      .card label {
+        font-weight: bold;
+        color: #374151;
+      }
+
+      .card input {
+        width: 93.3%;
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 1em;
+      }
+
+      .table {
+        width: 100%;
+        max-height: 400px;
+        overflow-y: auto;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+        background-color: var(--card-background);
+        color: var(--text-color);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      thead {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      tbody tr:hover {
+        background-color: var(--hover-background);
+        color: var(--text-color);
+      }
+
+      tbody tr:nth-child(2n) {
+        background-color: var(--table-bg-even);
+      }
+
+      tfoot {
+        background-color: var(--footer-background);
+        color: var(--footer-text-color);
+      }
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #10b981;
+        color: #ffffff;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #059669;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="main-left-content">
+        <button id="buttonId" onclick="toggleDarkMode()">
+          <i id="theme-icon" class="fa fa-sun"></i>
+          Alternar Modo Escuro
+        </button>
+        <div class="main-left-content-header">
+          <img src="../../img/avatar-design.png" alt="Icone de Administrador" />
+          <h1>Administrador</h1>
+        </div>
+        <div class="main-left-content-main">
+          <ul>
+            <li>
+              <a href="./painel_principal.html" target="_blank"
+                ><i class="fa-solid fa-chart-line"></i>Painel Principal</a
+              >
+            </li>
+            <li>
+              <a href="./adicionar_usuarios.html" target="_blank"
+                ><i class="fa-solid fa-user-plus"></i>Adicionar Usuários</a
+              >
+            </li>
+            <li>
+              <a href="./listar_usuarios.html" target="_parent"
+                ><i class="fa-solid fa-users"></i>Listar Usuários</a
+              >
+            </li>
+            <li>
+              <a href="./perfil_usuarios.html" target="_blank"><i class="fa-solid fa-gears"></i>Perfil do Usuário</a>
+            </li>
+            <li>
+              <a href="./login_page.html" onclick="redirectLoginPage()"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="main-left-content-footer">
+          <h1>ADM</h1>
+        </div>
+      </section>
+      <section class="main-right-content">
+        <div class="main-right-content-header">
+          <h1>Listar Usuários</h1>
+        </div>
+        <div class="main-right-content-main">
+          <div class="card">
+            <h2>Formulário de Listagem de Usuários</h2>
+            <label for="search">Buscar:</label>
+            <input
+              type="search"
+              id="search"
+              placeholder="Digite para buscar..."
+            />
+            <button onclick="executarBusca()">Buscar</button>
+
+            <div class="table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Função</th>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Usuário</th>
+                    <th>Palavra Passe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Administrador</td>
+                    <td>Kawê Souza Firmino</td>
+                    <td>28/12/2006</td>
+                    <td>82998025499</td>
+                    <td>kawefirmino9@gmail.com</td>
+                    <td>KawezitoOBrabo</td>
+                    <td>firminoKawe</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Farmacêutico</td>
+                    <td>João da Silva</td>
+                    <td>15/04/1985</td>
+                    <td>82991234567</td>
+                    <td>joaosilva@gmail.com</td>
+                    <td>JoaoPharma</td>
+                    <td>silvaJoao123</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Administrador</td>
+                    <td>Ana Clara Santos</td>
+                    <td>30/10/1992</td>
+                    <td>82992345678</td>
+                    <td>ana.santos@gmail.com</td>
+                    <td>AnaAdm</td>
+                    <td>claraAna#2023</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Farmacêutico</td>
+                    <td>Marcos Oliveira</td>
+                    <td>20/06/1990</td>
+                    <td>82993456789</td>
+                    <td>marcos.oliveira@gmail.com</td>
+                    <td>MarcosPharm</td>
+                    <td>oliveiraM90</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Administrador</td>
+                    <td>Beatriz Costa</td>
+                    <td>25/12/1988</td>
+                    <td>82994567890</td>
+                    <td>beatriz.costa@gmail.com</td>
+                    <td>BiaAdmin</td>
+                    <td>costaB88</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Farmacêutico</td>
+                    <td>Felipe Souza</td>
+                    <td>03/02/1995</td>
+                    <td>82995678901</td>
+                    <td>felipe.souza@gmail.com</td>
+                    <td>FelipePharma</td>
+                    <td>souzaFelipe95</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Administrador</td>
+                    <td>Lucas Pereira</td>
+                    <td>10/09/1987</td>
+                    <td>82996789012</td>
+                    <td>lucas.pereira@gmail.com</td>
+                    <td>LucasAdmin</td>
+                    <td>pereiraL87</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Farmacêutico</td>
+                    <td>Mariana Rocha</td>
+                    <td>05/11/1993</td>
+                    <td>82997890123</td>
+                    <td>mariana.rocha@gmail.com</td>
+                    <td>MarianaPharm</td>
+                    <td>rochaMari93</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr></tr>
+                </tfoot>
+              </table>              
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark-theme");
+        const button = document.getElementById("buttonId");
+        if (document.documentElement.classList.contains("dark-theme")) {
+          button.innerHTML =
+            '<i id="theme-icon" class="fa fa-moon"></i> Alternar Modo Claro';
+        } else {
+          button.innerHTML =
+            '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
+        }
+      }
+      function redirectLoginPage() {
+        window.open('../../../login_page.html', '_blank'); 
+        window.close(); 
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Principal ADM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background-color: #f3f4f6;
+        --primary-color: #10b981;
+        --secondary-color: #1f2937;
+        --text-color: #1a1a1a;
+        --hover-background: #374151;
+        --card-background: #ffffff;
+        --card-text-color: #4b5563;
+        --footer-background: #374151;
+        --footer-text-color: #9ca3af;
+        --border-color: #e5e7eb;
+      }
+
+      .dark-theme {
+        --background-color: #1f2937;
+        --primary-color: #10b981;
+        --secondary-color: #374151;
+        --text-color: #e5e7eb;
+        --hover-background: #4b5563;
+        --card-background: #374151;
+        --card-text-color: #d1d5db;
+        --footer-background: #4b5563;
+        --footer-text-color: #e5e7eb;
+        --border-color: #6b7280;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        background-color: var(--background-color);
+        font-family: Arial, sans-serif;
+        color: var(--text-color);
+        overflow: hidden;
+      }
+
+      main {
+        display: flex;
+        height: 100%;
+      }
+
+      .main-left-content {
+        width: 25%;
+        background-color: var(--secondary-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2% 0;
+        color: var(--text-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .main-left-content-header {
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .main-left-content-header img {
+        width: 120px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .main-left-content-main ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .main-left-content-main ul li {
+        margin: 10px 0;
+      }
+
+      .main-left-content-main ul li a {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        font-size: 1.1em;
+        text-decoration: none;
+        color: var(--footer-text-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .main-left-content-main ul li a:hover {
+        background-color: var(--hover-background);
+        color: var(--text-color);
+      }
+
+      .main-left-content-main ul li a i {
+        margin-right: 12px;
+        font-size: 1.3em;
+      }
+
+      .main-left-content-footer {
+        text-align: center;
+        padding: 15px 0;
+        background-color: var(--footer-background);
+        border-radius: 0 0 8px 8px;
+        color: var(--footer-text-color);
+      }
+
+      .main-right-content {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card {
+        flex: 1;
+        padding: 20px;
+        background-color: var(--card-background);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        color: var(--card-text-color);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .card h1 {
+        font-size: 1.5em;
+        color: var(--primary-color);
+      }
+
+      .card h2 {
+        font-size: 1.2em;
+        color: var(--card-text-color);
+      }
+
+      .card p {
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #6b7280;
+      }
+
+      .card ol {
+        list-style-type: decimal;
+        padding-left: 20px;
+        color: #4b5563;
+      }
+
+      .card input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        font-size: 1em;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        border: none;
+        font-size: 16px;
+        padding: 10px 20px;
+        margin: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      canvas {
+        background-color: var(--background-color);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="main-left-content">
+        <button id="buttonId" onclick="toggleDarkMode()">
+          <i id="theme-icon" class="fa fa-sun"></i>
+          Alternar Modo Escuro
+        </button>
+        <div class="main-left-content-header">
+          <img src="../../img/avatar-design.png" alt="Icone de Administrador" />
+          <h1>Farmacêutico</h1>
+        </div>
+        <div class="main-left-content-main">
+          <ul>
+            <li>
+              <a href="./painel_principal.html" target="_blank"
+                ><i class="fa-solid fa-chart-line"></i>Painel Principal</a
+              >
+            </li>
+            <li>
+              <a href="./adicionar_medicamentos.html" target="_blank"
+                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./listar_medicamentos.html" target="_parent"
+                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./alterar_medicamentos.html" target="_blank"
+                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./verificar_validades.html" target="_blank"
+                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
+              >
+            </li>
+            <li>
+              <a href="./vender_medicamentos.html" target="_blank"
+                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
+              >
+            </li>
+            <li>
+              <a href="./login_page.html" onclick="redirectLoginPage()"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="main-left-content-footer">
+          <h1>Farmacêutico</h1>
+        </div>
+      </section>
+      <section class="main-right-content">
+        <canvas id="myBarChart"></canvas>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark-theme");
+
+        const button = document.getElementById("buttonId");
+        if (document.documentElement.classList.contains("dark-theme")) {
+          button.innerHTML =
+            '<i id="theme-icon" class="fa fa-moon"></i> Alternar Modo Claro';
+          updateChartColors(true);
+        } else {
+          button.innerHTML =
+            '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
+          updateChartColors(false);
+        }
+      }
+
+      function redirectLoginPage() {
+        window.open("../../../login_page.html", "_blank");
+        window.close();
+      }
+
+      const ctx = document.getElementById("myBarChart").getContext("2d");
+      
+      const chartData = {
+        labels: ["Medicamentos Válidos", "Medicamentos Vencidos"],
+        datasets: [
+          {
+            label: "Medicamentos Válidos",
+            data: [12, 0],
+            backgroundColor: "rgba(75, 192, 192, 0.7)",
+            borderColor: "rgba(75, 192, 192, 1)",
+          },
+          {
+            label: "Medicamentos Vencidos",
+            data: [0, 7],
+            backgroundColor: "rgba(255, 99, 132, 0.7)",
+            borderColor: "rgba(255, 99, 132, 1)",
+          },
+        ],
+      };
+
+      const chartOptions = {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: "var(--text-color)",
+              font: {
+                size: 16, 
+              },
+            },
+          },
+          title: {
+            display: true,
+            text: "Medicamentos Disponíveis",
+            color: "var(--text-color)",
+            font: {
+              size: 20,
+              weight: "bold",
+            },
+          },
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: "var(--text-color)",
+              font: {
+                size: 16,
+                weight: "bold",
+              },
+            },
+          },
+          y: {
+            ticks: {
+              color: "var(--text-color)",
+              font: {
+                size: 14,
+              },
+            },
+          },
+        },
+      };
+
+      const myBarChart = new Chart(ctx, {
+        type: "bar",
+        data: chartData,
+        options: chartOptions,
+      });
+
+      function updateChartColors(isDarkMode) {
+        const textColor = isDarkMode ? "#e5e7eb" : "#1a1a1a";
+        myBarChart.options.plugins.legend.labels.color = textColor;
+        myBarChart.options.plugins.title.color = textColor;
+        myBarChart.options.scales.x.ticks.color = textColor;
+        myBarChart.options.scales.y.ticks.color = textColor;
+        myBarChart.update();
+      }
+    </script>
+  </body>
+</html>
