@@ -34,7 +34,6 @@
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;
       }
-
       main {
         display: flex;
         justify-content: center;
@@ -125,6 +124,39 @@
       .form-footer a:hover {
         text-decoration: underline;
       }
+      /* Estilo para os campos escondidos à direita */
+      .extra-fields {
+        display: none;
+        margin-top: 1rem;
+        text-align: left;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .show-button {
+        background-color: var(--blue-light);
+        color: white;
+        border: none;
+        padding: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        position: absolute;
+        top: 50%;
+        width: 60px;
+        right: 0;
+        z-index: 2;
+      }
+
+      .show-button:hover {
+        background-color: var(--blue-light);
+      }
     </style>
   </head>
   <body>
@@ -132,12 +164,9 @@
       <div class="form-container">
         <img src="./assets/img/logo.png" alt="Logo" />
         <h1>Crie uma Conta</h1>
-        <form onsubmit="redirect(event); return false">
+        <form id="registerForm">
           <label for="name">Nome Completo</label>
           <input type="text" id="name" name="name" required />
-  
-          <label for="tel">Telefone</label>
-          <input type="tel" id="tel" name="tel" required />
 
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required />
@@ -145,8 +174,29 @@
           <label for="password">Senha</label>
           <input type="password" id="password" name="password" required />
 
+          <label for="function">Função</label>
+          <input type="text" id="function" name="function" required />
+
           <button type="submit">Cadastrar-se</button>
         </form>
+
+        <!-- Botão para mostrar campos extras -->
+        <button type="button" class="show-button" onclick="toggleExtraFields()">
+          <i class="fa fa-arrow-right"></i>
+        </button>
+
+        <!-- Campos extras escondidos -->
+        <div class="extra-fields" id="extraFields">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" name="username" required />
+
+          <label for="phone">Telefone</label>
+          <input type="text" id="phone" name="phone" required />
+
+          <label for="birthdate">Data de Nascimento</label>
+          <input type="date" id="birthdate" name="birthdate" required />
+        </div>
+
         <div class="form-footer">
           <p>Já tem uma conta?</p>
           <a href="./login_page.html">Entrar aqui</a>
@@ -155,16 +205,33 @@
     </main>
 
     <script>
-      function redirect(event) {
+      const registerForm = document.getElementById("registerForm");
+
+      registerForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const nome = document.getElementById("name").value;
-        const tel = document.getElementById("tel").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
+        const funcao = document.getElementById("function").value;
+        const username = document.getElementById("username").value;
+        const phone = document.getElementById("phone").value;
+        const birthdate = document.getElementById("birthdate").value;
+        
+        alert("Cadastro realizado com sucesso!");
+        window.location.href = "./login_page.html";
+      });
 
-        alert("Formmulário enviado com sucesso!");
-        window.location.href = "../html/login_page.html";
+      function toggleExtraFields() {
+        const extraFields = document.getElementById("extraFields");
+        if (
+          extraFields.style.display === "none" ||
+          extraFields.style.display === ""
+        ) {
+          extraFields.style.display = "block";
+        } else {
+          extraFields.style.display = "none";
+        }
       }
     </script>
   </body>

@@ -205,40 +205,52 @@
           Alternar Modo Escuro
         </button>
         <div class="main-left-content-header">
+          
           <img src="../../img/avatar-design.png" alt="Icone de Administrador" />
           <h1>Administrador</h1>
         </div>
         <div class="main-left-content-main">
           <ul>
             <li>
-              <a href="#" target="_blank"
-                ><i class="fa-solid fa-chart-line"></i>Painel Principal</a
-              >
+              <a href="./painel_principal.html" target="_parent">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Painel Principal</span>
+              </a>
             </li>
             <li>
-              <a href="./adicionar_usuarios.html" target="_blank"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Usuários</a
-              >
+              <a href="./adicionar_usuarios.html" target="_parent">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Adicionar e Listar Usuários</span>
+              </a>
             </li>
             <li>
-              <a href="./listar_usuarios.html" target="_blank"
-                ><i class="fa-solid fa-users"></i>Listar Usuários</a
-              >
+              <a href="./clientes.html" target="_parent">
+                <i class="fa-solid fa-users"></i>
+                <span>Listar Clientes</span>
+              </a>
             </li>
             <li>
-              <a href="./perfil_usuarios.html" target="_blank"
-                ><i class="fa-solid fa-gears"></i>Perfil do Usuário</a
-              >
+              <a href="./perfil_usuarios.html" target="_parent">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Perfil do Usuário</span>
+              </a>
             </li>
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
-                ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
-              >
+              <a href="./relatorio.html" target="_parent">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Relatórios</span>
+              </a>
+            </li>
+            <li>
+              <a href="../../../login_page.html">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Log Out</span>
+              </a>
             </li>
           </ul>
         </div>
         <div class="main-left-content-footer">
-          <h1>ADM</h1>
+          <h1>Administrador</h1>
         </div>
       </section>
       <section class="main-right-content">
@@ -260,7 +272,7 @@
               usuários.
             </p>
             <h2>Total de Administradores</h2>
-            <input type="number" value="2" />
+            <input type="number" readonly id="totalAdmins"  value="1"/>
           </div>
           <div class="card">
             <h1>Farmacêutico</h1>
@@ -276,9 +288,14 @@
               O farmacêutico pode adicionar, gerir e vender medicamentos.
             </p>
             <h2>Total de Farmacêuticos</h2>
-            <input type="number" value="4" />
+            <input type="number" readonly id="totalFarmaceuticos" value="1"/>
           </div>
-          <i class="fa-solid fa-arrows-rotate"></i>
+          <button onclick="refreshData()">
+            <i
+              style="color: var(--card-background)"
+              class="fa-solid fa-arrows-rotate"
+            ></i>
+          </button>
         </div>
       </section>
     </main>
@@ -294,10 +311,7 @@
             '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
         }
       }
-      function redirectLoginPage() {
-        window.open('../../../login_page.html', '_blank'); 
-        window.close(); 
-      }
+
     </script>
   </body>
 </html>

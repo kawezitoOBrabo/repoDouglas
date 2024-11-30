@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Listar Usuários</title>
+    <title>Listar Medicamentos</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -149,7 +149,7 @@
       }
 
       .card {
-        width: 80%;
+        width: 100%;
         margin: auto;
         padding: 20px;
         background-color: #ffffff;
@@ -259,32 +259,33 @@
               >
             </li>
             <li>
-              <a href="./adicionar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
-              >
+              <a href="./adicionar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-pills"></i> Adicionar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./listar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
-              >
+              <a href="./listar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-box-open"></i> Listar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./alterar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
-              >
+              <a href="./alterar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-wrench"></i> Alterar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./verificar_validades.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
-              >
+              <a href="./verificar_validades.html" target="_parent">
+                <i class="fa-solid fa-calendar-check"></i> Verificar Validades
+              </a>
             </li>
             <li>
-              <a href="./vender_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
-              >
+              <a href="./vender_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-cash-register"></i> Vender Medicamentos
+              </a>
             </li>
+
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
+              <a href="../../../login_page.html"
                 ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
               >
             </li>
@@ -302,74 +303,170 @@
           <div class="card">
             <h2>Formulário de Listagem de Medicamentos</h2>
             <label for="search">Buscar:</label>
+            <!-- Campo de busca -->
             <input
-              type="search"
-              id="search"
-              placeholder="Digite para buscar..."
+              type="text"
+              id="searchInput"
+              placeholder="Digite o nome do medicamento"
+              onkeyup="buscarMedicamento()"
             />
-            <button onclick="executarBusca()">Buscar</button>
-
             <div class="table">
               <table>
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Id do Medicamento</th>
                     <th>Nome</th>
-                    <th>Número do Prduto</th>
+                    <th>Imagem</th>
                     <th>Data de Fabricação</th>
                     <th>Data de Expiração</th>
+                    <th>Status</th>
                     <th>Quantidade</th>
-                    <th>Preco por Unidade</th>
+                    <th>Preço por Unidade</th>
+                    <th>Fabricante</th>
+                    <th>Descrição</th>
+                    <th>Código de Barras</th>
+                    <th>Médico</th>
+                    <th>Tipo de Medicamento</th>
+                    <th>Uso Terapêutico</th>
+                    <th>Apresentação</th>
+                    <th>Origem</th>
+                    <th>Prescrição</th>
+                    <th>Público-Alvo</th>
+                    <th>Sistema Alvo</th>
+                    <th>Categoria Farmacológica</th>
+                    <th>Remover</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="medicamentosTabela">
+                  <!-- Medicamento 1 -->
                   <tr>
                     <td>1</td>
-                    <td>2000</td>
-                    <td>Paracetamol</td>
-                    <td>12</td>
-                    <td>20/10/2024</td>
-                    <td>11/11/2024</td>
-                    <td>25</td>
-                    <td>R$ 50,00</td>
+                    <td>Paracetamol 750mg</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.3e8855b8380837f36e6bf047fc23f66d?rik=QKHiAeSXSVv6Hw&pid=ImgRaw&r=0"
+                        alt="Paracetamol"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2023-01-10</td>
+                    <td>2025-01-10</td>
+                    <td>Ativo</td>
+                    <td>100</td>
+                    <td>0.50</td>
+                    <td>Farmaceutica ABC</td>
+                    <td>Alívio de dor e febre</td>
+                    <td>1234567890123</td>
+                    <td>Dr. João Silva</td>
+                    <td>Analgesicos</td>
+                    <td>Alívio de dor</td>
+                    <td>Comprimidos</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Adulto</td>
+                    <td>Respiratório</td>
+                    <td>Antiinflamatórios</td>
+                    <td><button>Remover</button></td>
                   </tr>
+                  <!-- Medicamento 2 -->
                   <tr>
                     <td>2</td>
-                    <td>2000</td>
-                    <td>Paracetamol</td>
-                    <td>12</td>
-                    <td>20/10/2024</td>
-                    <td>11/11/2024</td>
-                    <td>25</td>
-                    <td>R$ 50,00</td>
+                    <td>Ibuprofeno 800mg</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.9dfa01cc3f754e4ee3d20615045a8649?rik=%2fuT%2fiP8xNfvuBQ&riu=http%3a%2f%2ffarmaciainformativa.com%2fwp-content%2fuploads%2f2018%2f05%2fibuprofeno-6-e1525876532735.jpg&ehk=mSEB8QHyWmcj2%2fgm%2fGD0odPowqhsrTJ94sRj88Qh3us%3d&risl=&pid=ImgRaw&r=0"
+                        alt="Ibuprofeno"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2022-06-15</td>
+                    <td>2024-06-15</td>
+                    <td>Ativo</td>
+                    <td>50</td>
+                    <td>1.00</td>
+                    <td>Farmaceutica XYZ</td>
+                    <td>Anti-inflamatório e analgésico</td>
+                    <td>9876543210987</td>
+                    <td>Dr. Maria Souza</td>
+                    <td>Anti-inflamatórios</td>
+                    <td>Tratamento de inflamação</td>
+                    <td>Cápsulas</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Idoso</td>
+                    <td>Musculoesquelético</td>
+                    <td>Antiinflamatórios</td>
+                    <td><button>Remover</button></td>
                   </tr>
+                  <!-- Medicamento 3 -->
                   <tr>
                     <td>3</td>
-                    <td>2000</td>
-                    <td>Paracetamol</td>
-                    <td>12</td>
-                    <td>20/10/2024</td>
-                    <td>11/11/2024</td>
-                    <td>25</td>
-                    <td>R$ 50,00</td>
+                    <td>Amoxicilina 500mg</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.2a6ebfa3e04ae73d31aea0758f01a27b?rik=5fvdVfWrR85qfA&pid=ImgRaw&r=0"
+                        alt="Amoxicilina"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2023-03-20</td>
+                    <td>2025-03-20</td>
+                    <td>Ativo</td>
+                    <td>200</td>
+                    <td>1.20</td>
+                    <td>Laboratório Z</td>
+                    <td>Antibiótico para infecções bacterianas</td>
+                    <td>1122334455667</td>
+                    <td>Dr. Carlos Pereira</td>
+                    <td>Antibióticos</td>
+                    <td>Tratamento de infecções</td>
+                    <td>Comprimidos</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Adulto e Infantil</td>
+                    <td>Infeccioso</td>
+                    <td>Antibioticos</td>
+                    <td><button>Remover</button></td>
                   </tr>
+                  <!-- Medicamento 4 -->
                   <tr>
                     <td>4</td>
-                    <td>2000</td>
-                    <td>Paracetamol</td>
-                    <td>12</td>
-                    <td>20/10/2024</td>
-                    <td>11/11/2024</td>
-                    <td>25</td>
-                    <td>R$ 50,00</td>
+                    <td>Dipirona gotas 20ml</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.a3dc21a64ae15eecc4ca4c9904ad3b09?rik=%2bGZLBTDTP0ZBCg&pid=ImgRaw&r=0"
+                        alt="Dipirona"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2023-02-05</td>
+                    <td>2026-02-05</td>
+                    <td>Ativo</td>
+                    <td>150</td>
+                    <td>0.30</td>
+                    <td>Farmaceutica DEF</td>
+                    <td>Uso para dor e febre</td>
+                    <td>2233445566778</td>
+                    <td>Dr. Felipe Gomes</td>
+                    <td>Antipiréticos</td>
+                    <td>Controle de febre</td>
+                    <td>Comprimidos</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Adulto</td>
+                    <td>Digestivo</td>
+                    <td>Antipireticos</td>
+                    <td><button>Remover</button></td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr></tr>
                 </tfoot>
               </table>
-              <button style="background-color: #eb4646;">Remover</button>
             </div>
           </div>
         </div>
@@ -387,9 +484,29 @@
             '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
         }
       }
-      function redirectLoginPage() {
-        window.open("./login_page.html", "_blank");
-        window.close();
+      
+      function buscarMedicamento() {
+        // Obtém o valor digitado no campo de busca
+        const searchValue = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        // Obtém todas as linhas da tabela
+        const rows = document.querySelectorAll("#medicamentosTabela tr");
+
+        // Itera sobre cada linha da tabela
+        rows.forEach((row) => {
+          const nomeMedicamento = row.cells[1]?.textContent.toLowerCase(); // Pega o nome do medicamento (segunda célula da linha)
+
+          // Verifica se o nome do medicamento contém o valor digitado
+          if (nomeMedicamento && nomeMedicamento.includes(searchValue)) {
+            // Se encontrar, mostra a linha
+            row.style.display = "";
+          } else {
+            // Caso contrário, esconde a linha
+            row.style.display = "none";
+          }
+        });
       }
     </script>
   </body>

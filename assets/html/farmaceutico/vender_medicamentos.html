@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adicionar Usuários</title>
+    <title>Vender Medicamentos</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -143,12 +143,14 @@
       }
 
       .card {
-        width: 60%;
+        width: 80%;
+        height: 60vh;
         margin: auto;
         padding: 20px;
         background-color: #ffffff;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: overlay;
       }
 
       .card h2 {
@@ -199,6 +201,44 @@
       button:hover {
         background-color: #059669;
       }
+
+      #text_area {
+        height: 200px;
+      }
+
+      #lista {
+        margin-top: 20px;
+        width: 100%;
+        height: 150px;
+      }
+      #medicamentos_validos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      textarea#descricaoMedicamento {
+        height: 150px;
+        font-size: 20px;
+      }
+
+      .medicamento-botao {
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .medicamento-botao:hover {
+        background-color: #0056b3;
+      }
+
+      .medicamento-botao.selecionado {
+        background-color: #28a745;
+      }
     </style>
   </head>
 
@@ -221,32 +261,33 @@
               >
             </li>
             <li>
-              <a href="./adicionar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
-              >
+              <a href="./adicionar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-pills"></i> Adicionar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./listar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
-              >
+              <a href="./listar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-box-open"></i> Listar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./alterar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
-              >
+              <a href="./alterar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-wrench"></i> Alterar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./verificar_validades.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
-              >
+              <a href="./verificar_validades.html" target="_parent">
+                <i class="fa-solid fa-calendar-check"></i> Verificar Validades
+              </a>
             </li>
             <li>
-              <a href="./vender_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
-              >
+              <a href="./vender_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-cash-register"></i> Vender Medicamentos
+              </a>
             </li>
+
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
+              <a href="../../../login_page.html"
                 ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
               >
             </li>
@@ -259,52 +300,109 @@
 
       <section class="main-right-content">
         <div class="main-right-content-header">
-          <h1>Alterar Medicamentos</h1>
+          <h1>Vender Medicamentos</h1>
         </div>
         <div class="main-right-content-main">
           <div class="card">
-            <h2>Formulário de Alterção de Medicamentos</h2>
-            <form class="form-two-columns">
+            <h2>Formulário de Venda de Medicamentos</h2>
+            <form id="registerForm" class="form-two-columns">
+              <!-- Coluna 1: Informações do Medicamento -->
               <div class="form-column">
-                <label for="id">Id do Medicamento</label>
-                <input type="number" id="id" name="id" required />
+                <label for="idMedicamento">ID do Medicamento</label>
+                <input
+                  type="number"
+                  id="idMedicamento"
+                  name="idMedicamento"
+                  placeholder="Digite o ID"
+                  required
+                />
+
+                <label for="nomeMedicamento">Nome do Medicamento</label>
+                <input
+                  type="text"
+                  id="nomeMedicamento"
+                  name="nomeMedicamento"
+                  placeholder="Nome será preenchido automaticamente"
+                  readonly
+                  required
+                />
+
+                <label for="quantidadeEmStock">Quantidade em Estoque</label>
+                <input
+                  type="number"
+                  id="quantidadeEmStock"
+                  name="quantidadeEmStock"
+                  placeholder="Ex: 100"
+                  readonly
+                  required
+                />
+
+                <label for="descricaoMedicamento">Descrição</label>
                 <textarea
-                  name="texto"
-                  id="text_area"
-                  placeholder="Aqui tem os Medicamentos dentro da data de validade"
+                  id="descricaoMedicamento"
+                  name="descricaoMedicamento"
+                  placeholder="Descrição do medicamento"
+                  rows="4"
+                  readonly
+                  required
                 ></textarea>
               </div>
-              <div class="form-column">
-                <label for="id">Id do Medicamento</label>
-                <input type="number" id="id" name="id" required />
 
-                <label for="name">Nome do Medicamento</label>
-                <input type="text" name="name" id="name" required />
-
-                <label for="expiracao">Data de expiração</label>
-                <input type="date" name="expiracao" id="expiracao" required />
-              </div>
+              <!-- Coluna 2: Detalhes da Venda -->
               <div class="form-column">
-                <label for="quantidade">Quantidade em unidades</label>
+                <label for="quantidade">Quantidade a Vender</label>
                 <input
                   type="number"
                   name="quantidade"
                   id="quantidade"
+                  placeholder="Digite a quantidade"
                   required
                 />
+
+                <label for="precoUnitario">Preço Unitário (R$)</label>
+                <input
+                  type="number"
+                  name="precoUnitario"
+                  id="precoUnitario"
+                  step="0.01"
+                  readonly
+                  required
+                />
+
+                <label for="precoTotal">Preço Total (R$)</label>
+                <input
+                  type="number"
+                  name="precoTotal"
+                  id="precoTotal"
+                  step="0.01"
+                  readonly
+                  required
+                />
+
+                <label for="dataVenda">Data da Venda</label>
+                <input type="date" name="dataVenda" id="dataVenda" required />
+
+                <button type="button" id="adicionarCarrinho">
+                  Adicionar ao Carrinho
+                  <i class="fa-solid fa-circle-check"></i>
+                </button>
+
+                <h3>
+                  Total do Carrinho: R$ <span id="totalCarrinho">0.00</span>
+                </h3>
               </div>
-              <button type="reset">
-                Limpar cuppon
-                <i class="fa-solid fa-arrows-rotate"></i>
-              </button>
-              <button type="submit">
-                Adicionar ao carrinho
-                <i class="fa-solid fa-circle-check"></i>
-              </button>
             </form>
-            <textarea name="" id="" placeholder="aqui vai ter os itens em formato de lista dos produtos do carrinho"></textarea>
-            <button>Remover produto</button>
-            <button>Imprimir Fatura</button>
+
+            <textarea
+              id="lista"
+              readonly
+              style="width: 100%; max-height: 100px; overflow-y: scroll"
+              placeholder="Itens adicionados ao carrinho"
+              required
+            ></textarea>
+            <button id="imprimir_fatura" onclick="gerarFatura()">
+              Imprimir Fatura
+            </button>
           </div>
         </div>
       </section>
@@ -321,9 +419,182 @@
             '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
         }
       }
-      function redirectLoginPage() {
-        window.open("../login_page.html", "_blank");
-        window.close();
+
+      const medicamentos = [
+        {
+          id: 1,
+          nome: "Paracetamol",
+          descricao: "Analgésico e antitérmico.",
+          preco: 15.5,
+          quantidade: 100,
+        },
+        {
+          id: 2,
+          nome: "Ibuprofeno",
+          descricao: "Anti-inflamatório não esteroidal.",
+          preco: 20.75,
+          quantidade: 50,
+        },
+        {
+          id: 3,
+          nome: "Amoxicilina 500mg",
+          descricao: "Antibiótico para infecções bacterianas.",
+          preco: 1.2,
+          quantidade: 200,
+        },
+        {
+          id: 4,
+          nome: "Dipirona gotas 20ml",
+          descricao: "Uso para dor e febre.",
+          preco: 0.3,
+          quantidade: 150,
+        },
+      ];
+
+      // Carrinho de compras
+      let carrinho = [];
+
+      // Preenche os campos ao digitar o ID
+      document
+        .getElementById("idMedicamento")
+        .addEventListener("input", (e) => {
+          const medicamento = medicamentos.find(
+            (med) => med.id === parseInt(e.target.value)
+          );
+          if (medicamento) {
+            document.getElementById("nomeMedicamento").value = medicamento.nome;
+            document.getElementById("descricaoMedicamento").value =
+              medicamento.descricao;
+            document.getElementById("quantidadeEmStock").value =
+              medicamento.quantidade;
+            document.getElementById("precoUnitario").value = medicamento.preco;
+          } else {
+            document.getElementById("nomeMedicamento").value = "";
+            document.getElementById("descricaoMedicamento").value = "";
+            document.getElementById("quantidadeEmStock").value = "";
+            document.getElementById("precoUnitario").value = "";
+            alert("Id inválido!");
+          }
+        });
+
+      // Atualiza o preço total ao alterar a quantidade
+      document.getElementById("quantidade").addEventListener("input", (e) => {
+        const precoUnitario = parseFloat(
+          document.getElementById("precoUnitario").value
+        );
+        const quantidade = parseInt(e.target.value);
+
+        if (!isNaN(precoUnitario) && !isNaN(quantidade)) {
+          document.getElementById("precoTotal").value = (
+            precoUnitario * quantidade
+          ).toFixed(2);
+        } else {
+          document.getElementById("precoTotal").value = "";
+        }
+      });
+
+      // Adiciona o medicamento ao carrinho e verifica a quantidade em estoque
+      document
+        .getElementById("adicionarCarrinho")
+        .addEventListener("click", () => {
+          const idMedicamento = document.getElementById("idMedicamento").value;
+          const nomeMedicamento =
+            document.getElementById("nomeMedicamento").value;
+          const quantidadeDigitada = parseInt(
+            document.getElementById("quantidade").value
+          );
+          const precoTotal = document.getElementById("precoTotal").value;
+          const precoUnitario = document.getElementById("precoUnitario").value;
+          const quantidadeEmStock = parseInt(
+            document.getElementById("quantidadeEmStock").value
+          );
+
+          if (
+            !idMedicamento ||
+            !nomeMedicamento ||
+            !quantidadeDigitada ||
+            !precoTotal
+          ) {
+            alert("Preencha todos os campos antes de adicionar ao carrinho!");
+            return;
+          }
+
+          if (quantidadeDigitada > quantidadeEmStock) {
+            alert(
+              `Quantidade indisponível! Estoque atual: ${quantidadeEmStock}.`
+            );
+            return;
+          }
+
+          const item = {
+            id: idMedicamento,
+            nome: nomeMedicamento,
+            quantidade: quantidadeDigitada,
+            precoTotal: parseFloat(precoTotal),
+            precoUnitario: parseFloat(precoUnitario), // Agora adiciona o precoUnitario ao item
+          };
+          carrinho.push(item);
+
+          // Atualiza o estoque do medicamento
+          const medicamento = medicamentos.find(
+            (med) => med.id === parseInt(idMedicamento)
+          );
+          if (medicamento) {
+            medicamento.quantidade -= quantidadeDigitada;
+            document.getElementById("quantidadeEmStock").value =
+              medicamento.quantidade; // Atualiza o estoque exibido
+          }
+
+          // Exibe os itens no carrinho
+          const lista = document.getElementById("lista");
+          lista.value += `ID: ${item.id} - Nome: ${item.nome} - Quantidade: ${
+            item.quantidade
+          } - Total: R$ ${item.precoTotal.toFixed(2)}\n`;
+
+          // Atualiza o total do carrinho
+          atualizarTotalCarrinho();
+        });
+
+      // Função para calcular e exibir o total do carrinho
+      function atualizarTotalCarrinho() {
+        // Calculando o total considerando a quantidade de cada item
+        const total = carrinho.reduce((acc, item) => {
+          return acc + item.precoUnitario * item.quantidade; // Multiplica o preço pela quantidade de cada item
+        }, 0);
+
+        // Exibe o total com 2 casas decimais no console e em algum lugar na tela (se necessário)
+        console.log("Total do carrinho: R$", total.toFixed(2));
+
+        // Se você quiser exibir o total na tela, adicione um elemento, como um span:
+        document.getElementById(
+          "totalCarrinho"
+        ).innerText = `Total: R$ ${total.toFixed(2)}`;
+      }
+
+      function gerarFatura() {
+        let nome = prompt("Informe o nome do cliente:");
+        let cpf = prompt("Informe o CPF do cliente:");
+        let medicamento = document.getElementById("nomeMedicamento").value;
+        let quantidade = document.getElementById("quantidade").value;
+        let valor = document.getElementById("precoTotal").value;
+
+        if (!nome || !cpf || !medicamento || !quantidade || !valor) {
+          alert("Por favor, preencha todos os campos.");
+          return;
+        }
+
+        let fatura = `Fatura de Venda
+          ========================
+          Cliente: ${nome}
+          CPF: ${cpf}
+          Medicamento: ${medicamento}
+          Quantidade: ${quantidade}
+          Valor Total: R$${valor * quantidade}
+          ========================
+          Obrigado por comprar conosco!
+          `;
+        console.log(fatura);
+        alert(fatura);
       }
     </script>
   </body>
