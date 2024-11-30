@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adicionar Medicamentos</title>
+    <title>Relatórios - Painel de Gerente</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -12,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
-
     <style>
       :root {
         --background-color: #f3f4f6;
@@ -198,9 +197,8 @@
       .submit-btn {
         background-color: #4caf50;
         color: #fff;
-        padding: 20px;
+        padding: 12px 20px;
         width: 100%;
-        height: 80px;
         font-size: 16px;
         border: none;
         border-radius: 5px;
@@ -248,7 +246,6 @@
       button:hover {
         background-color: #059669;
       }
-
       .card {
         width: 60%;
         margin: auto;
@@ -387,134 +384,46 @@
               </a>
             </li>
           </ul>
-        </div>
+        </div>        
         <div class="main-left-content-footer">
           <h1>Administrador</h1>
         </div>
       </section>
       <section class="main-right-content">
         <div class="main-right-content-header">
-          <h1>Adicionar Usuários</h1>
+          <h1>Relatórios</h1>
         </div>
         <div class="main-right-content-main">
           <div class="card">
-            <h2>Formulário de Adição de Usuários</h2>
-            <form
-              id="addUserForm"
-              class="form-two-columns"
-              onsubmit="adicionarUsuario(event)"
-            >
-              <div class="form-column">
-                <label for="nomeUsuario">Nome do Usuário</label>
-                <input
-                  type="text"
-                  name="nomeUsuario"
-                  id="nomeUsuario"
-                  required
-                  placeholder="Nome completo do usuário"
-                />
+            <h1>Gerar Relatório</h1>
+            <form id="reportForm">
+              <h2>Escolha as opções para o relatório:</h2>
 
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  required
-                  placeholder="Email do usuário"
-                />
+              <label for="startDate">Data Inicial:</label>
+              <input type="date" id="startDate" name="startDate" required />
 
-                <label for="telefone">Telefone</label>
-                <input
-                  type="tel"
-                  name="telefone"
-                  id="telefone"
-                  required
-                  placeholder="Telefone do usuário"
-                />
+              <label for="endDate">Data Final:</label>
+              <input type="date" id="endDate" name="endDate" required />
 
-                <label for="dataNascimento">Data de Nascimento</label>
-                <input
-                  type="date"
-                  name="dataNascimento"
-                  id="dataNascimento"
-                  required
-                />
+              <label for="reportType">Tipo de Relatório:</label>
+              <select id="reportType" name="reportType" required>
+                <option value="">Selecione...</option>
+                <option value="sales">Vendas</option>
+                <option value="stock">Estoque</option>
+                <option value="financial">Financeiro</option>
+              </select>
 
-                <label for="funcao">Função</label>
-                <input
-                  type="text"
-                  name="funcao"
-                  id="funcao"
-                  required
-                  placeholder="Função do usuário"
-                />
+              <div id="optionalFilters">
+                <!-- Filtros adicionais serão adicionados dinamicamente aqui -->
               </div>
 
-              <div class="form-column">
-                <label for="username">Username</label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  required
-                  placeholder="Nome de usuário"
-                />
-
-                <label for="senha">Senha</label>
-                <input
-                  type="password"
-                  name="senha"
-                  id="senha"
-                  required
-                  placeholder="Senha do usuário"
-                />
-
-                <label for="confirmarSenha">Confirmar Senha</label>
-                <input
-                  type="password"
-                  name="confirmarSenha"
-                  id="confirmarSenha"
-                  required
-                  placeholder="Confirme a senha"
-                />
-
-                <label for="status">Status</label>
-                <select name="status" id="status" required>
-                  <option value="ativo">Ativo</option>
-                  <option value="inativo">Inativo</option>
-                </select>
-              </div>
-
-              <div class="form-buttons">
-                <button type="submit" class="submit-btn">
-                  Adicionar Usuário <i class="fa-solid fa-user-plus"></i>
-                </button>
-                <button type="reset" class="reset-btn">
-                  Limpar <i class="fa-solid fa-arrows-rotate"></i>
-                </button>
-              </div>
+              <button type="submit">Gerar Relatório</button>
             </form>
-            <!-- Tabela para mostrar os usuários adicionados -->
-            <h3>Usuários Cadastrados</h3>
-            <table id="usuariosTable">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>Função</th>
-                  <th>Username</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- As linhas de usuários serão adicionadas aqui -->
-              </tbody>
-            </table>
           </div>
         </div>
       </section>
     </main>
+
     <script>
       function toggleDarkMode() {
         document.documentElement.classList.toggle("dark-theme");
@@ -528,55 +437,91 @@
         }
       }
 
-      // Função para exibir a mensagem de sucesso após o envio do formulário
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Previne o envio do formulário para testar
-          document.getElementById("success-message").style.display = "block"; // Exibe a mensagem de sucesso
-          setTimeout(function () {
-            document.getElementById("success-message").style.display = "none"; // Oculta a mensagem após 5 segundos
-          }, 5000);
+      document.addEventListener("DOMContentLoaded", () => {
+        const reportType = document.getElementById("reportType");
+        const optionalFilters = document.getElementById("optionalFilters");
+
+        reportType.addEventListener("change", () => {
+          optionalFilters.innerHTML = ""; // Limpa filtros anteriores
+
+          const type = reportType.value;
+
+          if (type === "sales") {
+            optionalFilters.innerHTML = `
+              <label for="paymentType">Tipo de Pagamento:</label>
+              <select id="paymentType" name="paymentType">
+                <option value="">Selecione...</option>
+                <option value="creditCard">Cartão de Crédito</option>
+                <option value="debitCard">Cartão de Débito</option>
+                <option value="cash">Dinheiro</option>
+              </select>
+
+              <label for="productCategory">Tipo de Medicamento:</label>
+              <select id="productCategory" name="productCategory">
+                <option value="">Selecione</option>
+                <option value="antibioticos">Antibióticos</option>
+                <option value="analgesicos">Analgésicos</option>
+                <option value="antiInflamatorios">Anti-inflamatórios</option>
+                <option value="antipireticos">
+                  Antipiréticos (para febre)
+                </option>
+                <option value="antialergicos">
+                  Antialérgicos (antihistamínicos)
+                </option>
+                <option value="antifungicos">Antifúngicos</option>
+                <option value="antivirais">Antivirais</option>
+                <option value="antidepressivos">Antidepressivos</option>
+                <option value="antipsicoticos">Antipsicóticos</option>
+                <option value="ansioliticos">Ansiolíticos</option>
+                <option value="anticonvulsivantes">Anticonvulsivantes</option>
+                <option value="antiHipertensivos">Anti-hipertensivos</option>
+                <option value="hipoglicemiantes">
+                  Hipoglicemiantes (para diabetes)
+                </option>
+                <option value="broncodilatadores">Broncodilatadores</option>
+                <option value="corticosteroides">Corticosteroides</option>
+                <option value="antiacidos">Antiácidos</option>
+                <option value="laxantes">Laxantes</option>
+                <option value="antidiarreicos">Antidiarreicos</option>
+                <option value="antiemeticos">
+                  Antieméticos (para náuseas e vômitos)
+                </option>
+              </select>
+            `;
+          } else if (type === "stock") {
+            optionalFilters.innerHTML = `
+              <label for="stockStatus">Status do Estoque:</label>
+              <select id="stockStatus" name="stockStatus">
+                <option value="">Selecione...</option>
+                <option value="low">Baixo</option>
+                <option value="expired">Vencidos</option>
+                <option value="sufficient">Suficiente</option>
+              </select>
+            `;
+          } else if (type === "financial") {
+            optionalFilters.innerHTML = `
+              <label for="financialCategory">Categoria Financeira:</label>
+              <select id="financialCategory" name="financialCategory">
+                <option value="">Selecione...</option>
+                <option value="revenue">Receita</option>
+                <option value="expenses">Despesas</option>
+              </select>
+            `;
+          }
         });
 
-      // Função para adicionar usuário
-      function adicionarUsuario(event) {
-        event.preventDefault(); // Impede o envio do formulário
-
-        // Captura os dados do formulário
-        const nome = document.getElementById("nomeUsuario").value;
-        const email = document.getElementById("email").value;
-        const telefone = document.getElementById("telefone").value;
-        const dataNascimento = document.getElementById("dataNascimento").value;
-        const funcao = document.getElementById("funcao").value;
-        const username = document.getElementById("username").value;
-        const senha = document.getElementById("senha").value;
-
-        // Cria uma nova linha para a tabela
-        const tabela = document
-          .getElementById("usuariosTable")
-          .getElementsByTagName("tbody")[0];
-        const novaLinha = tabela.insertRow();
-
-        // Adiciona os dados à nova linha
-        novaLinha.innerHTML = `
-          <td>${nome}</td>
-          <td>${email}</td>
-          <td>${telefone}</td>
-          <td>${funcao}</td>
-          <td>${username}</td>
-          <td><button onclick="deletarUsuario(this)">Deletar</button></td>
-        `;
-
-        // Limpa os campos do formulário após adicionar o usuário
-        document.getElementById("addUserForm").reset();
-      }
-
-      // Função para deletar um usuário
-      function deletarUsuario(botao) {
-        const linha = botao.parentNode.parentNode;
-        linha.remove();
-      }
+        // Lida com o envio do formulário
+        const form = document.getElementById("reportForm");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const reportData = Object.fromEntries(formData.entries());
+          console.log("Gerando relatório com os dados:", reportData);
+          alert(
+            "Relatório gerado com sucesso! Confira o console para os detalhes."
+          );
+        });
+      });
     </script>
   </body>
 </html>

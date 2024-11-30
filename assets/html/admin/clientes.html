@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Listar Usuários</title>
+    <title>Listar Medicamentos</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -149,7 +149,7 @@
       }
 
       .card {
-        width: 80%;
+        width: 100%;
         margin: auto;
         padding: 20px;
         background-color: #ffffff;
@@ -254,149 +254,96 @@
         <div class="main-left-content-main">
           <ul>
             <li>
-              <a href="./painel_principal.html" target="_blank"
-                ><i class="fa-solid fa-chart-line"></i>Painel Principal</a
-              >
+              <a href="./painel_principal.html" target="_parent">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Painel Principal</span>
+              </a>
             </li>
             <li>
-              <a href="./adicionar_usuarios.html" target="_blank"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Usuários</a
-              >
+              <a href="./adicionar_usuarios.html" target="_parent">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Adicionar e Listar Usuários</span>
+              </a>
             </li>
             <li>
-              <a href="./listar_usuarios.html" target="_parent"
-                ><i class="fa-solid fa-users"></i>Listar Usuários</a
-              >
+              <a href="./clientes.html" target="_parent">
+                <i class="fa-solid fa-users"></i>
+                <span>Listar Clientes</span>
+              </a>
             </li>
             <li>
-              <a href="./perfil_usuarios.html" target="_blank"><i class="fa-solid fa-gears"></i>Perfil do Usuário</a>
+              <a href="./perfil_usuarios.html" target="_parent">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Perfil do Usuário</span>
+              </a>
             </li>
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
-                ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
-              >
+              <a href="./relatorio.html" target="_parent">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Relatórios</span>
+              </a>
+            </li>
+            <li>
+              <a href="../../../login_page.html">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Log Out</span>
+              </a>
             </li>
           </ul>
-        </div>
+        </div>        
         <div class="main-left-content-footer">
-          <h1>ADM</h1>
+          <h1>Administrador</h1>
         </div>
       </section>
       <section class="main-right-content">
         <div class="main-right-content-header">
-          <h1>Listar Usuários</h1>
+          <h1>Listar Clientes</h1>
         </div>
         <div class="main-right-content-main">
           <div class="card">
-            <h2>Formulário de Listagem de Usuários</h2>
-            <label for="search">Buscar:</label>
-            <input
-              type="search"
-              id="search"
-              placeholder="Digite para buscar..."
-            />
-            <button onclick="executarBusca()">Buscar</button>
-
+            <h2>Formulário de Listagem de Clientes e suas compras</h2>            
             <div class="table">
               <table>
                 <thead>
                   <tr>
-                    <th>Id</th>
-                    <th>Função</th>
                     <th>Nome</th>
-                    <th>Data de Nascimento</th>
-                    <th>Telefone</th>
-                    <th>Email</th>
-                    <th>Usuário</th>
-                    <th>Palavra Passe</th>
+                    <th>CPF</th>
+                    <th>ID da Compra</th>
+                    <th>Data da Compra</th>
+                    <th>Tipo de Pagamento</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>Administrador</td>
-                    <td>Kawê Souza Firmino</td>
-                    <td>28/12/2006</td>
-                    <td>82998025499</td>
-                    <td>kawefirmino9@gmail.com</td>
-                    <td>KawezitoOBrabo</td>
-                    <td>firminoKawe</td>
+                    <td>João Silva</td>
+                    <td>123.456.789-00</td>
+                    <td>#001</td>
+                    <td>10/11/2024</td>
+                    <td>Cartão de Crédito</td>
                   </tr>
                   <tr>
-                    <td>2</td>
-                    <td>Farmacêutico</td>
-                    <td>João da Silva</td>
-                    <td>15/04/1985</td>
-                    <td>82991234567</td>
-                    <td>joaosilva@gmail.com</td>
-                    <td>JoaoPharma</td>
-                    <td>silvaJoao123</td>
+                    <td>Maria Oliveira</td>
+                    <td>987.654.321-00</td>
+                    <td>#002</td>
+                    <td>11/11/2024</td>
+                    <td>Boleto</td>
                   </tr>
                   <tr>
-                    <td>3</td>
-                    <td>Administrador</td>
-                    <td>Ana Clara Santos</td>
-                    <td>30/10/1992</td>
-                    <td>82992345678</td>
-                    <td>ana.santos@gmail.com</td>
-                    <td>AnaAdm</td>
-                    <td>claraAna#2023</td>
+                    <td>Carlos Pereira</td>
+                    <td>456.789.123-45</td>
+                    <td>#003</td>
+                    <td>12/11/2024</td>
+                    <td>Pix</td>
                   </tr>
                   <tr>
-                    <td>4</td>
-                    <td>Farmacêutico</td>
-                    <td>Marcos Oliveira</td>
-                    <td>20/06/1990</td>
-                    <td>82993456789</td>
-                    <td>marcos.oliveira@gmail.com</td>
-                    <td>MarcosPharm</td>
-                    <td>oliveiraM90</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Administrador</td>
-                    <td>Beatriz Costa</td>
-                    <td>25/12/1988</td>
-                    <td>82994567890</td>
-                    <td>beatriz.costa@gmail.com</td>
-                    <td>BiaAdmin</td>
-                    <td>costaB88</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Farmacêutico</td>
-                    <td>Felipe Souza</td>
-                    <td>03/02/1995</td>
-                    <td>82995678901</td>
-                    <td>felipe.souza@gmail.com</td>
-                    <td>FelipePharma</td>
-                    <td>souzaFelipe95</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td>Administrador</td>
-                    <td>Lucas Pereira</td>
-                    <td>10/09/1987</td>
-                    <td>82996789012</td>
-                    <td>lucas.pereira@gmail.com</td>
-                    <td>LucasAdmin</td>
-                    <td>pereiraL87</td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td>Farmacêutico</td>
-                    <td>Mariana Rocha</td>
-                    <td>05/11/1993</td>
-                    <td>82997890123</td>
-                    <td>mariana.rocha@gmail.com</td>
-                    <td>MarianaPharm</td>
-                    <td>rochaMari93</td>
+                    <td>Ana Souza</td>
+                    <td>321.654.987-00</td>
+                    <td>#004</td>
+                    <td>13/11/2024</td>
+                    <td>Débito</td>
                   </tr>
                 </tbody>
-                <tfoot>
-                  <tr></tr>
-                </tfoot>
-              </table>              
+              </table>
             </div>
           </div>
         </div>
@@ -414,9 +361,29 @@
             '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
         }
       }
-      function redirectLoginPage() {
-        window.open('../../../login_page.html', '_blank'); 
-        window.close(); 
+
+      function buscarMedicamento() {
+        // Obtém o valor digitado no campo de busca
+        const searchValue = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        // Obtém todas as linhas da tabela
+        const rows = document.querySelectorAll("#medicamentosTabela tr");
+
+        // Itera sobre cada linha da tabela
+        rows.forEach((row) => {
+          const nomeMedicamento = row.cells[1]?.textContent.toLowerCase(); // Pega o nome do medicamento (segunda célula da linha)
+
+          // Verifica se o nome do medicamento contém o valor digitado
+          if (nomeMedicamento && nomeMedicamento.includes(searchValue)) {
+            // Se encontrar, mostra a linha
+            row.style.display = "";
+          } else {
+            // Caso contrário, esconde a linha
+            row.style.display = "none";
+          }
+        });
       }
     </script>
   </body>

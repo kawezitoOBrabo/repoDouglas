@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Painel Principal ADM</title>
+    <title>Painel Principal Farmacêutico</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -201,37 +201,38 @@
         <div class="main-left-content-main">
           <ul>
             <li>
-              <a href="./painel_principal.html" target="_blank"
+              <a href="./painel_principal.html" target="_parent"
                 ><i class="fa-solid fa-chart-line"></i>Painel Principal</a
               >
             </li>
             <li>
-              <a href="./adicionar_medicamentos.html" target="_blank"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
-              >
+              <a href="./adicionar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-pills"></i> Adicionar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./listar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
-              >
+              <a href="./listar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-box-open"></i> Listar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./alterar_medicamentos.html" target="_blank"
-                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
-              >
+              <a href="./alterar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-wrench"></i> Alterar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./verificar_validades.html" target="_blank"
-                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
-              >
+              <a href="./verificar_validades.html" target="_parent">
+                <i class="fa-solid fa-calendar-check"></i> Verificar Validades
+              </a>
             </li>
             <li>
-              <a href="./vender_medicamentos.html" target="_blank"
-                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
-              >
+              <a href="./vender_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-cash-register"></i> Vender Medicamentos
+              </a>
             </li>
+
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
+              <a href="../../../login_page.html"
                 ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
               >
             </li>
@@ -254,33 +255,25 @@
         if (document.documentElement.classList.contains("dark-theme")) {
           button.innerHTML =
             '<i id="theme-icon" class="fa fa-moon"></i> Alternar Modo Claro';
-          updateChartColors(true);
         } else {
           button.innerHTML =
             '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
-          updateChartColors(false);
         }
       }
-
-      function redirectLoginPage() {
-        window.open("../../../login_page.html", "_blank");
-        window.close();
-      }
-
       const ctx = document.getElementById("myBarChart").getContext("2d");
-      
+
       const chartData = {
         labels: ["Medicamentos Válidos", "Medicamentos Vencidos"],
         datasets: [
           {
             label: "Medicamentos Válidos",
-            data: [12, 0],
+            data: [3, 0],
             backgroundColor: "rgba(75, 192, 192, 0.7)",
             borderColor: "rgba(75, 192, 192, 1)",
           },
           {
             label: "Medicamentos Vencidos",
-            data: [0, 7],
+            data: [0, 1],
             backgroundColor: "rgba(255, 99, 132, 0.7)",
             borderColor: "rgba(255, 99, 132, 1)",
           },
@@ -294,7 +287,7 @@
             labels: {
               color: "var(--text-color)",
               font: {
-                size: 16, 
+                size: 16,
               },
             },
           },
@@ -333,6 +326,20 @@
         type: "bar",
         data: chartData,
         options: chartOptions,
+      });
+      
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const response = await fetch("http://localhost:8000/medicamentosGrafico");
+          const data = await response.json();
+
+          chartData.datasets[0].data = [data.validos, 0];
+          chartData.datasets[1].data = [0, data.vencidos];
+
+          myBarChart.update();
+        } catch (error) {
+          console.error("Erro ao buscar dados:", error);
+        }
       });
 
       function updateChartColors(isDarkMode) {

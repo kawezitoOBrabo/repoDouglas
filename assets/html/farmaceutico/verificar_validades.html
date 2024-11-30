@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Listar Usuários</title>
+    <title>Verificar Validades</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -249,6 +249,17 @@
       button:hover {
         background-color: #059669;
       }
+
+      /* Adicionando a animação */
+      .fade-out {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+      }
+
+      /* Quando a linha for removida, ela deve desaparecer suavemente */
+      table tr.removed {
+        display: none;
+      }
     </style>
   </head>
 
@@ -271,49 +282,50 @@
               >
             </li>
             <li>
-              <a href="./adicionar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
-              >
+              <a href="./adicionar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-pills"></i> Adicionar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./listar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
-              >
+              <a href="./listar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-box-open"></i> Listar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./alterar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
-              >
+              <a href="./alterar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-wrench"></i> Alterar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./verificar_validades.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
-              >
+              <a href="./verificar_validades.html" target="_parent">
+                <i class="fa-solid fa-calendar-check"></i> Verificar Validades
+              </a>
             </li>
             <li>
-              <a href="./vender_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
-              >
+              <a href="./vender_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-cash-register"></i> Vender Medicamentos
+              </a>
             </li>
+
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
-                ><i class="fa-solid fa-user"></i>Sair</a
+              <a href="../../../login_page.html"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
               >
             </li>
           </ul>
         </div>
         <div class="main-left-content-footer">
-          <span>Farmácias São João</span>
+          <h1>Farmacêutico</h1>
         </div>
       </section>
 
       <section class="main-right-content">
         <div class="main-right-content-header">
-          <h1>Medicamentos</h1>
+          <h1>Verificar Validades</h1>
         </div>
         <div class="main-right-content-main">
           <div class="card">
-            <h2>Lista de Medicamentos</h2>
+            <h2>Verificar Validades</h2>
             <div class="card">
               <label for="filterSelect">Escolha o filtro de validade</label>
               <select id="filterSelect" onchange="filterMedicamentos()">
@@ -325,78 +337,162 @@
                 <option value="em-dia">Medicamentos em dia</option>
               </select>
             </div>
-            <div class="table" id="medicamentosTable">
+            <div class="table" id="medicamentosTabela">
               <table>
                 <thead>
                   <tr>
-                    <th>Código</th>
+                    <th>Id</th>
                     <th>Nome</th>
-                    <th>Data Validade</th>
-                    <th>Data Expiração</th>
+                    <th>Imagem</th>
+                    <th>Data de Fabricação</th>
+                    <th>Data de Expiração</th>
+                    <th>Status</th>
+                    <th>Quantidade</th>
+                    <th>Preço por Unidade</th>
+                    <th>Fabricante</th>
+                    <th>Descrição</th>
+                    <th>Código de Barras</th>
+                    <th>Médico</th>
+                    <th>Tipo de Medicamento</th>
+                    <th>Uso Terapêutico</th>
+                    <th>Apresentação</th>
+                    <th>Origem</th>
+                    <th>Prescrição</th>
+                    <th>Público-Alvo</th>
+                    <th>Sistema Alvo</th>
+                    <th>Categoria Farmacológica</th>
+                    <th>Remover</th>
                   </tr>
                 </thead>
-                <tbody id="medicamentosList">
+                <tbody id="medicamentosTabela">
+                  <!-- Medicamento 1 -->
                   <tr>
-                    <td>001</td>
-                    <td>Paracetamol</td>
-                    <td>2025-12-12</td>
-                    <td>2024-11-12</td>
-                  </tr>
-                  <tr>
-                    <td>002</td>
-                    <td>Ibuprofeno</td>
-                    <td>2024-11-20</td>
-                    <td>2024-10-25</td>
-                  </tr>
-                  <tr>
-                    <td>003</td>
-                    <td>Dipirona</td>
-                    <td>2024-11-05</td>
-                    <td>2024-10-10</td>
-                  </tr>
-                  <tr>
-                    <td>004</td>
-                    <td>Amoxicilina</td>
-                    <td>2025-03-15</td>
-                    <td>2024-08-15</td>
-                  </tr>
-                  <tr>
-                    <td>005</td>
-                    <td>Omeprazol</td>
-                    <td>2026-07-30</td>
-                    <td>2024-09-20</td>
-                  </tr>
-                  <tr>
-                    <td>006</td>
-                    <td>Losartana</td>
-                    <td>2025-05-01</td>
-                    <td>2024-10-30</td>
-                  </tr>
-                  <tr>
-                    <td>007</td>
-                    <td>Simvastatina</td>
-                    <td>2025-02-10</td>
-                    <td>2024-09-10</td>
-                  </tr>
-                  <tr>
-                    <td>008</td>
-                    <td>Cefalexina</td>
-                    <td>2024-11-25</td>
-                    <td>2024-10-05</td>
-                  </tr>
-                  <tr>
-                    <td>009</td>
-                    <td>Cloridrato de Fluoxetina</td>
+                    <td>1</td>
+                    <td>Paracetamol 750mg</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.3e8855b8380837f36e6bf047fc23f66d?rik=QKHiAeSXSVv6Hw&pid=ImgRaw&r=0"
+                        alt="Paracetamol"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2023-01-10</td>
                     <td>2025-01-10</td>
-                    <td>2024-09-12</td>
+                    <td>Ativo</td>
+                    <td>100</td>
+                    <td>0.50</td>
+                    <td>Farmaceutica ABC</td>
+                    <td>Alívio de dor e febre</td>
+                    <td>1234567890123</td>
+                    <td>Dr. João Silva</td>
+                    <td>Analgesicos</td>
+                    <td>Alívio de dor</td>
+                    <td>Comprimidos</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Adulto</td>
+                    <td>Respiratório</td>
+                    <td>Antiinflamatórios</td>
+                    <td><button class="remove-btn">Remover</button></td>
                   </tr>
+                  <!-- Medicamento 2 -->
                   <tr>
-                    <td>010</td>
-                    <td>Atorvastatina</td>
-                    <td>2025-04-20</td>
-                    <td>2024-11-15</td>
+                    <td>2</td>
+                    <td>Ibuprofeno 800mg</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.9dfa01cc3f754e4ee3d20615045a8649?rik=%2fuT%2fiP8xNfvuBQ&riu=http%3a%2f%2ffarmaciainformativa.com%2fwp-content%2fuploads%2f2018%2f05%2fibuprofeno-6-e1525876532735.jpg&ehk=mSEB8QHyWmcj2%2fgm%2fGD0odPowqhsrTJ94sRj88Qh3us%3d&risl=&pid=ImgRaw&r=0"
+                        alt="Ibuprofeno"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2022-06-15</td>
+                    <td>2024-06-15</td>
+                    <td>Ativo</td>
+                    <td>50</td>
+                    <td>1.00</td>
+                    <td>Farmaceutica XYZ</td>
+                    <td>Anti-inflamatório e analgésico</td>
+                    <td>9876543210987</td>
+                    <td>Dr. Maria Souza</td>
+                    <td>Anti-inflamatórios</td>
+                    <td>Tratamento de inflamação</td>
+                    <td>Cápsulas</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Idoso</td>
+                    <td>Musculoesquelético</td>
+                    <td>Antiinflamatórios</td>
+                    <td><button class="remove-btn">Remover</button></td>
+                  </tr>
+                  <!-- Medicamento 3 -->
+                  <tr>
+                    <td>3</td>
+                    <td>Amoxicilina 500mg</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.2a6ebfa3e04ae73d31aea0758f01a27b?rik=5fvdVfWrR85qfA&pid=ImgRaw&r=0"
+                        alt="Amoxicilina"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2023-03-20</td>
+                    <td>2025-03-20</td>
+                    <td>Ativo</td>
+                    <td>200</td>
+                    <td>1.20</td>
+                    <td>Laboratório Z</td>
+                    <td>Antibiótico para infecções bacterianas</td>
+                    <td>1122334455667</td>
+                    <td>Dr. Carlos Pereira</td>
+                    <td>Antibióticos</td>
+                    <td>Tratamento de infecções</td>
+                    <td>Comprimidos</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Adulto e Infantil</td>
+                    <td>Infeccioso</td>
+                    <td>Antibioticos</td>
+                    <td><button class="remove-btn">Remover</button></td>
+                  </tr>
+                  <!-- Medicamento 4 -->
+                  <tr>
+                    <td>4</td>
+                    <td>Dipirona gotas 20ml</td>
+                    <td>
+                      <img
+                        src="https://th.bing.com/th/id/R.a3dc21a64ae15eecc4ca4c9904ad3b09?rik=%2bGZLBTDTP0ZBCg&pid=ImgRaw&r=0"
+                        alt="Dipirona"
+                        width="50"
+                        height="50"
+                      />
+                    </td>
+                    <td>2023-02-05</td>
+                    <td>2026-02-05</td>
+                    <td>Ativo</td>
+                    <td>150</td>
+                    <td>0.30</td>
+                    <td>Farmaceutica DEF</td>
+                    <td>Uso para dor e febre</td>
+                    <td>2233445566778</td>
+                    <td>Dr. Felipe Gomes</td>
+                    <td>Antipiréticos</td>
+                    <td>Controle de febre</td>
+                    <td>Comprimidos</td>
+                    <td>Alopático</td>
+                    <td>Comum</td>
+                    <td>Adulto</td>
+                    <td>Digestivo</td>
+                    <td>Antipireticos</td>
+                    <td><button class="remove-btn">Remover</button></td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr></tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -419,39 +515,54 @@
 
       function filterMedicamentos() {
         const filterValue = document.getElementById("filterSelect").value;
-        const medicamentos = document
-          .getElementById("medicamentosList")
-          .getElementsByTagName("tr");
+        const rows = document.querySelectorAll("#medicamentosTabela tbody tr");
 
-        for (let i = 0; i < medicamentos.length; i++) {
-          const medicamento = medicamentos[i];
-          const validade =
-            medicamento.getElementsByTagName("td")[2].textContent;
+        const today = new Date();
 
-          let show = false;
-          const today = new Date();
-          const validadeDate = new Date(validade);
-          const timeDiff = validadeDate - today;
-          const daysUntilExpiration = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        rows.forEach((row) => {
+          const expDateCell = row.cells[4]; // Coluna da data de expiração
+          const expDate = new Date(expDateCell.textContent);
 
+          // Define a lógica de exibição com base no filtro selecionado
           switch (filterValue) {
-            case "validade-proxima":
-              show = daysUntilExpiration <= 30;
+            case "todos":
+              row.style.display = ""; // Mostra todos os medicamentos
               break;
             case "vencidos":
-              show = daysUntilExpiration < 0;
+              row.style.display = expDate < today ? "" : "none"; // Mostra só os vencidos
               break;
             case "em-dia":
-              show = daysUntilExpiration > 0;
+              row.style.display = expDate >= today ? "" : "none"; // Mostra os dentro da validade
               break;
-            case "todos":
+            case "validade-proxima":
+              const daysDifference = (expDate - today) / (1000 * 60 * 60 * 24);
+              row.style.display =
+                daysDifference > 0 && daysDifference <= 30 ? "" : "none"; // Mostra os próximos de vencer (30 dias)
+              break;
             default:
-              show = true;
+              row.style.display = "";
           }
-
-          medicamento.style.display = show ? "" : "none";
-        }
+        });
       }
+      // Função para remover a linha com animação e confirmação
+      document.querySelectorAll(".remove-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          // Exibe uma caixa de confirmação
+          const confirmRemove = confirm(
+            "Tem certeza de que deseja remover este medicamento?"
+          );
+
+          if (confirmRemove) {
+            const row = this.closest("tr"); // Encontra a linha da tabela onde o botão foi clicado
+            row.classList.add("fade-out"); // Aplica a animação de fade-out
+
+            // Aguarda o tempo da animação antes de remover a linha
+            setTimeout(() => {
+              row.classList.add("removed"); // Remove a linha após a animação
+            }, 500); // O tempo deve ser igual ao tempo de transição no CSS
+          }
+        });
+      });
     </script>
   </body>
 </html>

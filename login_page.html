@@ -132,7 +132,7 @@
       <div class="form-container">
         <img src="./assets/img/logo.png" alt="Logo" />
         <h1>Fazer Login</h1>
-        <form onsubmit="redirect(event)">
+        <form id="loginForm">
           <label for="loginUser">Usuário</label>
           <input
             type="text"
@@ -160,44 +160,28 @@
     </main>
 
     <script>
-      function redirect(event) {
+      const loginForm = document.getElementById("loginForm");
+
+      loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const user = document.getElementById("loginUser").value;
         const password = document.getElementById("loginPassword").value;
 
-        if (user === "kawe" && password === "admin") {
+        if ((user === "admin" || user === "Admin") && password === user) {
+          alert("Login realizado com sucesso!");
           window.location.href = "./assets/html/admin/painel_principal.html";
         } else if (
-          user === "kawe" &&
-          password === "farmaceutico"
+          (user === "farmaceutico" || user === "Farmaceutico") &&
+          password === user
         ) {
-          window.location.href = "./assets/html/farmaceutico/painel_principal.html";
+          alert("Login realizado com sucesso!");
+          window.location.href =
+            "./assets/html/farmaceutico/painel_principal.html";
         } else {
-          alert("Informe um user válido!");
+          alert("Usuário ou senha incorreta!");
         }
-
-        alert("Formmulário enviado com sucesso!");
-      }
-      
-      function loginUser(event) {
-        event.preventDefault();
-
-        const user = document.getElementById("loginUser").value;
-        const password = document.getElementById("loginPassword").value;
-
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-
-        const validUser = users.find(
-          (u) => u.user === user && u.password === password
-        );
-
-        if (validUser) {
-          alert("Login bem-sucedido!");
-        } else {
-          alert("Usuário ou senha incorretos!");
-        }
-      }
+      });
     </script>
   </body>
 </html>

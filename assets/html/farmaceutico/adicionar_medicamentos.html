@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+
     <style>
       :root {
         --background-color: #f3f4f6;
@@ -56,6 +57,8 @@
       main {
         display: flex;
         height: 100%;
+        overflow-x: hidden;
+        /* Prevent horizontal scroll */
       }
 
       .main-left-content {
@@ -142,6 +145,109 @@
         height: 100%;
       }
 
+      .main-right-content-main .card {
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 8px;
+        height: 60vh;
+        width: 80%;
+        overflow: overlay;
+      }
+
+      .card h2 {
+        font-size: 20px;
+        color: #444;
+        margin-bottom: 20px;
+      }
+
+      .form-column {
+        width: 48%;
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      input[type="file"] {
+        padding: 5px;
+      }
+
+      .form-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+      }
+
+      .reset-btn,
+      .submit-btn {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 20px;
+        width: 100%;
+        height: 80px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .reset-btn {
+        background-color: #f44336;
+      }
+
+      .reset-btn i,
+      .submit-btn i {
+        margin-left: 8px;
+      }
+
+      .reset-btn:hover,
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+
+      .success-message {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #10b981;
+        color: #ffffff;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #059669;
+      }
       .card {
         width: 60%;
         margin: auto;
@@ -182,23 +288,6 @@
         border-radius: 4px;
         font-size: 1em;
       }
-
-      button {
-        width: 100%;
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #10b981;
-        color: #ffffff;
-        border: none;
-        font-size: 1em;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-      }
-
-      button:hover {
-        background-color: #059669;
-      }
     </style>
   </head>
 
@@ -221,32 +310,33 @@
               >
             </li>
             <li>
-              <a href="./adicionar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-user-plus"></i>Adicionar Medicamentos</a
-              >
+              <a href="./adicionar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-pills"></i> Adicionar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./listar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-users"></i>Listar Medicamentos</a
-              >
+              <a href="./listar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-box-open"></i> Listar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./alterar_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Alterar Medicamentos</a
-              >
+              <a href="./alterar_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-wrench"></i> Alterar Medicamentos
+              </a>
             </li>
             <li>
-              <a href="./verificar_validades.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Verificar Validades</a
-              >
+              <a href="./verificar_validades.html" target="_parent">
+                <i class="fa-solid fa-calendar-check"></i> Verificar Validades
+              </a>
             </li>
             <li>
-              <a href="./vender_medicamentos.html" target="_parent"
-                ><i class="fa-solid fa-gears"></i>Vender Medicamentos</a
-              >
+              <a href="./vender_medicamentos.html" target="_parent">
+                <i class="fa-solid fa-cash-register"></i> Vender Medicamentos
+              </a>
             </li>
+
             <li>
-              <a href="./login_page.html" onclick="redirectLoginPage()"
+              <a href="../../../login_page.html"
                 ><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</a
               >
             </li>
@@ -262,26 +352,53 @@
         </div>
         <div class="main-right-content-main">
           <div class="card">
-            <h2>Formulário de Adição de os Medicamentos</h2>
-            <form class="form-two-columns" onsubmit="registerUser(event)">
+            <h2>Formulário de Adição de Medicamentos</h2>
+            <form id="registerForm" class="form-two-columns">
               <div class="form-column">
-                <label for="id">Id do Medicamento</label>
-                <input type="number" name="id" id="id" required />
+                <label for="name">Nome</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  required
+                  placeholder="Nome do medicamento"
+                />
 
-                <label for="name">Nome Completo</label>
-                <input type="text" name="name" id="name" required />
+                <label for="imagem">Imagem do Medicamento</label>
+                <input type="file" name="imagem" id="imagem" accept="image/*" />
 
-                <label for="number">Nº do Medicamento</label>
-                <input type="number" name="number" id="number" required />
+                <label for="dateFabricacao">Data de Fabricação</label>
+                <input
+                  type="date"
+                  name="dateFabricacao"
+                  id="dateFabricacao"
+                  required
+                />
 
-                <label for="dateFabr">Data de Fabricação</label>
-                <input type="date" name="dateFabr" id="dateFabr" required />
+                <label for="dateExpiracao">Data de Expiração</label>
+                <input
+                  type="date"
+                  name="dateExpiracao"
+                  id="dateExpiracao"
+                  required
+                />
+
+                <label for="status">Status</label>
+                <select name="status" id="status" required>
+                  <option value="ativo">Ativo</option>
+                  <option value="inativo">Inativo</option>
+                </select>
+
+                <label for="receita">Receita</label>
+                <input
+                  type="file"
+                  name="receita"
+                  id="receita"
+                  accept="image/*"
+                />
               </div>
               <div class="form-column">
-                <label for="dateExp">Data de Expiração</label>
-                <input type="date" name="dateExp" id="dateExp" required />
-
-                <label for="quantidade">Quantidade</label>
+                <label for="quantidade">Quantidade em Stock</label>
                 <input
                   type="number"
                   name="quantidade"
@@ -290,17 +407,227 @@
                 />
 
                 <label for="preco">Preço por Unidade</label>
-                <input type="text" name="preco" id="preco" required />
-                <button type="submit" onclick="alert('Medicamento Adicionado')">
-                  Adicionar
-                  <i class="fa-solid fa-add"></i>
+                <input
+                  type="number"
+                  name="preco"
+                  id="preco"
+                  step="0.01"
+                  required
+                />
+
+                <label for="fabricante">Fabricante</label>
+                <input
+                  type="text"
+                  name="fabricante"
+                  id="fabricante"
+                  required
+                  placeholder="Nome do fabricante"
+                />
+
+                <label for="descricao">Descrição</label>
+                <textarea
+                  name="descricao"
+                  id="descricao"
+                  rows="4"
+                  placeholder="Informações adicionais sobre o medicamento"
+                ></textarea>
+
+                <label for="codigoBarras">Código de Barras</label>
+                <input
+                  type="text"
+                  name="codigoBarras"
+                  id="codigoBarras"
+                  required
+                  placeholder="Código de barras ou ID"
+                />
+
+                <label for="medico">Nome do Médico</label>
+                <input
+                  type="text"
+                  name="medico"
+                  id="medico"
+                  placeholder="Nome do médico"
+                />
+              </div>
+              <div class="form-column">
+                <label for="tipoMedicamento">Tipo de Medicamento</label>
+                <select name="tipoMedicamento" id="tipoMedicamento" required>
+                  <option value="">Selecione</option>
+                  <option value="antibioticos">Antibióticos</option>
+                  <option value="analgesicos">Analgésicos</option>
+                  <option value="antiInflamatorios">Anti-inflamatórios</option>
+                  <option value="antipireticos">
+                    Antipiréticos (para febre)
+                  </option>
+                  <option value="antialergicos">
+                    Antialérgicos (antihistamínicos)
+                  </option>
+                  <option value="antifungicos">Antifúngicos</option>
+                  <option value="antivirais">Antivirais</option>
+                  <option value="antidepressivos">Antidepressivos</option>
+                  <option value="antipsicoticos">Antipsicóticos</option>
+                  <option value="ansioliticos">Ansiolíticos</option>
+                  <option value="anticonvulsivantes">Anticonvulsivantes</option>
+                  <option value="antiHipertensivos">Anti-hipertensivos</option>
+                  <option value="hipoglicemiantes">
+                    Hipoglicemiantes (para diabetes)
+                  </option>
+                  <option value="broncodilatadores">Broncodilatadores</option>
+                  <option value="corticosteroides">Corticosteroides</option>
+                  <option value="antiacidos">Antiácidos</option>
+                  <option value="laxantes">Laxantes</option>
+                  <option value="antidiarreicos">Antidiarreicos</option>
+                  <option value="antiemeticos">
+                    Antieméticos (para náuseas e vômitos)
+                  </option>
+                </select>
+                <!-- Uso Terapêutico -->
+                <label for="usoTerapeutico">Uso Terapêutico</label>
+                <select name="usoTerapeutico" id="usoTerapeutico" required>
+                  <option value="">Selecione</option>
+                  <option value="cardiologicos">Cardiológicos</option>
+                  <option value="neurologicos">Neurológicos</option>
+                  <option value="psiquiatricos">Psiquiátricos</option>
+                  <option value="dermatologicos">Dermatológicos</option>
+                  <option value="oftalmologicos">Oftalmológicos</option>
+                  <option value="otorrinolaringologicos">
+                    Otorrinolaringológicos
+                  </option>
+                  <option value="reumatologicos">Reumatológicos</option>
+                  <option value="urologicos">Urológicos</option>
+                  <option value="endocrinologicos">Endocrinológicos</option>
+                  <option value="ginecologicos">Ginecológicos</option>
+                  <option value="pediatricos">Pediátricos</option>
+                  <option value="oncologicos">Oncológicos</option>
+                </select>
+
+                <!-- Apresentação -->
+                <label for="apresentacao">Apresentação</label>
+                <select name="apresentacao" id="apresentacao" required>
+                  <option value="">Selecione</option>
+                  <option value="comprimidos">Comprimidos</option>
+                  <option value="capsulas">Cápsulas</option>
+                  <option value="injetaveis">Injetáveis</option>
+                  <option value="xaropes">Xaropes</option>
+                  <option value="supositorios">Supositórios</option>
+                  <option value="gotas">Gotas</option>
+                  <option value="pomadas">Pomadas</option>
+                  <option value="cremes">Cremes</option>
+                  <option value="geis">Géis</option>
+                  <option value="adesivos_transdermicos">
+                    Adesivos Transdérmicos
+                  </option>
+                  <option value="pos_para_reconstituicao">
+                    Pós para Reconstituição
+                  </option>
+                  <option value="aerossois">Aerossóis (sprays)</option>
+                </select>
+
+                <!-- Origem -->
+                <label for="origem">Origem</label>
+                <select name="origem" id="origem" required>
+                  <option value="">Selecione</option>
+                  <option value="alopatico">Alopático</option>
+                  <option value="homeopatico">Homeopático</option>
+                  <option value="fitoterapico">Fitoterápico</option>
+                  <option value="suplementosAlimentares">
+                    Suplementos Alimentares
+                  </option>
+                  <option value="naturais">Naturais</option>
+                  <!-- Outras opções -->
+                </select>
+
+                <!-- Necessidade de Prescrição -->
+                <label for="necessidadeDePrescricao"
+                  >Necessidade de Prescrição</label
+                >
+                <select
+                  name="necessidadeDePrescricao"
+                  id="necessidadeDePrescricao"
+                  required
+                >
+                  <option value="">Selecione</option>
+                  <option value="mip">Isento de Prescrição</option>
+                  <option value="comum">Comum</option>
+                  <option value="controlado">Controlado</option>
+                  <option value="usoHospitalar">Uso Hospitalar</option>
+                </select>
+
+                <!-- Público-Alvo -->
+                <label for="publicoAlvo">Público-Alvo</label>
+                <select name="publicoAlvo" id="publicoAlvo" required>
+                  <option value="">Selecione</option>
+                  <option value="pediatrico">Pediátrico</option>
+                  <option value="adulto">Adulto</option>
+                  <option value="geriatrico">Geriátrico</option>
+                  <option value="veterinario">Veterinário</option>
+                </select>
+
+                <!-- Sistema Alvo -->
+                <label for="sistemaAlvo">Sistema Alvo</label>
+                <select name="sistemaAlvo" id="sistemaAlvo" required>
+                  <option value="">Selecione</option>
+                  <option value="sistema_digestivo">Sistema Digestivo</option>
+                  <option value="sistema_respiratorio">
+                    Sistema Respiratório
+                  </option>
+                  <option value="sistema_nervoso_central">
+                    Sistema Nervoso Central
+                  </option>
+                  <option value="sistema_circulatorio">
+                    Sistema Circulatório
+                  </option>
+                  <option value="sistema_imunologico">
+                    Sistema Imunológico
+                  </option>
+                  <option value="sistema_urinario">Sistema Urinário</option>
+                  <option value="sistema_reprodutivo">
+                    Sistema Reprodutivo
+                  </option>
+                </select>
+
+                <!-- Categoria Farmacológica -->
+                <label for="categoriaFarmacologica"
+                  >Categoria Farmacológica</label
+                >
+                <select
+                  name="categoriaFarmacologica"
+                  id="categoriaFarmacologica"
+                  required
+                >
+                  <option value="">Selecione</option>
+                  <option value="antagonistas_de_receptores">
+                    Antagonistas de Receptores (e.g., beta-bloqueadores)
+                  </option>
+                  <option value="inibidores_de_enzimas">
+                    Inibidores de Enzimas (e.g., inibidores de ECA)
+                  </option>
+                  <option value="agonistas_hormonais">
+                    Agonistas Hormonais
+                  </option>
+                  <option value="bloqueadores_neuromusculares">
+                    Bloqueadores Neuromusculares
+                  </option>
+                  <option value="imunossupressores">Imunossupressores</option>
+                  <option value="estimulantes">Estimulantes</option>
+                </select>
+              </div>
+              <div class="form-buttons">
+                <button type="submit" class="submit-btn">
+                  Adicionar <i class="fa-solid fa-add"></i>
                 </button>
-                <button type="reset">
-                  Limpar
-                  <i class="fa-solid fa-arrows-rotate"></i>
+                <button type="reset" class="reset-btn">
+                  Limpar <i class="fa-solid fa-arrows-rotate"></i>
                 </button>
               </div>
             </form>
+            <div
+              id="success-message"
+              class="success-message"
+              style="display: none"
+            >
+              <p>Medicamento registrado com sucesso!</p>
+            </div>
           </div>
         </div>
       </section>
@@ -317,24 +644,17 @@
             '<i id="theme-icon" class="fa fa-sun"></i> Alternar Modo Escuro';
         }
       }
-      function redirectLoginPage() {
-        window.open("../../../login_page.html", "_blank");
-        window.close();
-      }
-      function registerUser(event) {
-        event.preventDefault(); // Evita o envio padrão do formulário
 
-        const user = document.getElementById("user").value;
-        const password = document.getElementById("password").value;
-
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-
-        users.push({ user, password });
-
-        localStorage.setItem("users", JSON.stringify(users));
-
-        alert("Usuário registrado com sucesso!");
-      }
+      // Função para exibir a mensagem de sucesso após o envio do formulário
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Previne o envio do formulário para testar
+          document.getElementById("success-message").style.display = "block"; // Exibe a mensagem de sucesso
+          setTimeout(function () {
+            document.getElementById("success-message").style.display = "none"; // Oculta a mensagem após 5 segundos
+          }, 5000);
+        });
     </script>
   </body>
 </html>
